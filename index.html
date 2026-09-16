@@ -29,14 +29,14 @@
       <div class="hero-copy">
         <div class="eyebrow">PRIVATE TRIP PLANNER · 2026/09 查證</div>
         <h1>帶兩台電輔折疊車，<br><em>沿鐵路慢慢騎台灣。</em></h1>
-        <p>為兩人、每車兩顆電池量身整理。22 條一日路線皆不超過 70 公里，優先串連專用自行車道、低車流道路與可辦理兩鐵服務的車站。</p>
+        <p>為兩人、每車兩顆電池量身整理。36 條一日路線皆不超過 70 公里，整合地方政府官方推薦、專用自行車道、低車流道路與可辦理兩鐵服務的車站。</p>
         <div class="hero-actions">
           <button class="primary" data-jump="routes">開始選路線</button>
           <button class="ghost" data-jump="rail">先看攜車規定</button>
         </div>
       </div>
       <div class="hero-stats" aria-label="網站規劃摘要">
-        <div><strong>26</strong><span>條精選路線</span></div>
+        <div><strong>36</strong><span>條精選路線</span></div>
         <div><strong>≤70</strong><span>每日公里</span></div>
         <div><strong>4</strong><span>台灣分區</span></div>
         <div><strong>2×2</strong><span>人車 × 電池</span></div>
@@ -114,7 +114,21 @@
     <section class="route-explorer" id="routes">
       <div class="section-heading">
         <div><span class="kicker">互動路線庫</span><h2>今天想往哪裡騎？</h2></div>
-        <p id="resultCount">共 26 條路線</p>
+        <p id="resultCount">共 36 條路線</p>
+      </div>
+
+      <div class="personal-import" id="my-routes">
+        <div>
+          <span class="kicker">MY RIDE ARCHIVE</span>
+          <h3>我的騎乘路線</h3>
+          <p>匯入過去騎過的 GPX，地圖、距離與節點會自動加入路線庫。資料只保存在這台裝置，不會出現在公開網站的其他訪客畫面。</p>
+        </div>
+        <div class="import-actions">
+          <label class="import-button">匯入 GPX<input id="gpxImport" type="file" accept=".gpx,application/gpx+xml" multiple hidden></label>
+          <button id="exportPersonal" class="ghost small">備份我的路線</button>
+          <button id="clearPersonal" class="text-danger">清除本機路線</button>
+          <small id="personalStatus">尚未匯入個人路線</small>
+        </div>
       </div>
 
       <div class="filter-panel" aria-label="路線篩選器">
@@ -124,7 +138,7 @@
         </div>
         <div class="filter-group">
           <label for="regionFilter">地區</label>
-          <select id="regionFilter"><option value="all">全台灣</option><option value="北部">北部</option><option value="中部">中部</option><option value="南部">南部</option><option value="東部">東部</option></select>
+          <select id="regionFilter"><option value="all">全台灣</option><option value="北部">北部</option><option value="中部">中部</option><option value="南部">南部</option><option value="東部">東部</option><option value="我的路線">我的路線</option></select>
         </div>
         <div class="filter-group">
           <label for="distanceFilter">距離</label>
@@ -133,6 +147,10 @@
         <div class="filter-group">
           <label for="typeFilter">路線類型</label>
           <select id="typeFilter"><option value="all">全部類型</option><option value="自行車道">自行車道優先</option><option value="海岸">海岸風景</option><option value="田園">田園聚落</option><option value="山景">山景爬升</option><option value="城市">城市慢遊</option></select>
+        </div>
+        <div class="filter-group">
+          <label for="sourceFilter">資料來源</label>
+          <select id="sourceFilter"><option value="all">全部來源</option><option value="official">政府官方路線</option><option value="extended">官方路網延伸</option><option value="planned">本站規劃</option><option value="personal">我的 GPX</option></select>
         </div>
         <button id="resetFilters" class="reset">清除</button>
       </div>
