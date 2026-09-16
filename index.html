@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b3b36">
+  <title>台灣電輔折疊單車旅行地圖</title>
+  <meta name="description" content="兩人、兩車、雙電池、每日 70 公里內的台鐵銜接單車路線規劃工具。">
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="preconnect" href="https://tile.openstreetmap.org">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="回到頁首">
+      <span class="brand-mark">⚡</span>
+      <span><b>騎電台灣</b><small>電輔折疊車 × 台鐵</small></span>
+    </a>
+    <nav>
+      <button class="nav-btn active" data-jump="routes">找路線</button>
+      <button class="nav-btn" data-jump="rail">台鐵規定</button>
+      <button class="nav-btn" data-jump="checklist">出發檢查</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">PRIVATE TRIP PLANNER · 2026/09 查證</div>
+        <h1>帶兩台電輔折疊車，<br><em>沿鐵路慢慢騎台灣。</em></h1>
+        <p>為兩人、每車兩顆電池量身整理。22 條一日路線皆不超過 70 公里，優先串連專用自行車道、低車流道路與可辦理兩鐵服務的車站。</p>
+        <div class="hero-actions">
+          <button class="primary" data-jump="routes">開始選路線</button>
+          <button class="ghost" data-jump="rail">先看攜車規定</button>
+        </div>
+      </div>
+      <div class="hero-stats" aria-label="網站規劃摘要">
+        <div><strong>26</strong><span>條精選路線</span></div>
+        <div><strong>≤70</strong><span>每日公里</span></div>
+        <div><strong>4</strong><span>台灣分區</span></div>
+        <div><strong>2×2</strong><span>人車 × 電池</span></div>
+      </div>
+    </section>
+
+    <section class="rail-alert" id="rail">
+      <div class="section-heading light">
+        <div><span class="kicker">先釐清再上車</span><h2>台鐵攜車：折疊裝袋與整車同行，是兩套規則</h2></div>
+        <span class="verified">✓ 官方資料查證 2026/09/16</span>
+      </div>
+      <div class="rail-grid">
+        <article class="rule-card recommended">
+          <div class="rule-label">最適合折疊車</div>
+          <h3>折疊後完整裝入攜車袋</h3>
+          <p class="rule-lead">符合隨身行李尺寸，可免費搭乘一般列車。</p>
+          <ul>
+            <li>車體與拆下的車輪都不得外露，不可用一般塑膠袋代替。</li>
+            <li>每件最長 150 cm，長＋寬＋高合計不超過 220 cm。</li>
+            <li>不得阻礙走道，依站務或乘務人員指定位置放置。</li>
+          </ul>
+        </article>
+        <article class="rule-card">
+          <div class="rule-label amber">不折疊整車上車</div>
+          <h3>指定兩鐵班次＋開放車站</h3>
+          <p class="rule-lead">人票另購；自行車票為所搭車種全票的 5 折。</p>
+          <ul>
+            <li>限腳踏車及「非鉛酸電池」電動輔助自行車。</li>
+            <li>上車前拆電池或關閉電源，出站前不得復電。</li>
+            <li>非對號列車只在窗口售票，個人票於乘車日含當日 4 日內購買。</li>
+          </ul>
+        </article>
+        <article class="rule-card danger">
+          <div class="rule-label red">重要限制</div>
+          <h3>不是每站、每班都能上</h3>
+          <p class="rule-lead">出發前務必查當日班次與自行車額度。</p>
+          <ul>
+            <li>電動自行車、協力車與改裝車不適用整車同行。</li>
+            <li>對號班次額度有限；兩人兩車要同時取得對應車位。</li>
+            <li>違規攜車可能補收違約金，並在前方兩鐵車站下車。</li>
+          </ul>
+        </article>
+      </div>
+      <details class="rail-details">
+        <summary>查看現行對號「人車同行」班次、售票規則與開放車站</summary>
+        <div class="rail-detail-body">
+          <div>
+            <h4>每日對號班次（官網查得）</h4>
+            <p>102 斗六→七堵、109 基隆→屏東、115 基隆→屏東、138 屏東→七堵、156 屏東→嘉義、270 嘉義→花蓮、277 花蓮→斗南；各 10 車額度，實際時刻與臨時調整以訂票系統為準。</p>
+            <h4>兩人兩車怎麼買</h4>
+            <p>對號列車可網路訂票，乘車前 28 天開放；人數與自行車數須一致。非對號班次僅能至車站窗口購買，車票和自行車票可分開發售。</p>
+          </div>
+          <div>
+            <h4>網站路線使用方式</h4>
+            <p>每條路線都標示建議上下車站。若選擇不折疊整車上車，仍應用台鐵「兩鐵列車時刻／車次」查詢該日指定班次與額度；若折疊裝袋，彈性通常較高。</p>
+            <div class="source-links">
+              <a href="https://www.railway.gov.tw/tra-tip-web/tip/tip00D/tipD11/view21" target="_blank" rel="noopener">官方：對號人車同行 ↗</a>
+              <a href="https://www.railway.gov.tw/tra-tip-web/tip/tip00D/tipD11/view22" target="_blank" rel="noopener">官方：非對號人車同行 ↗</a>
+              <a href="https://www.railway.gov.tw/tra-tip-web/tip/tip00D/tipD11/goBikeStation" target="_blank" rel="noopener">官方：開放兩鐵車站 ↗</a>
+              <a href="https://www.railway.gov.tw/tra-tip-web/tip/tip00C/tipC21/view?subCode=8ae4cac3756b7b41017573eaf8f31963" target="_blank" rel="noopener">官方：隨身行李規定 ↗</a>
+            </div>
+          </div>
+        </div>
+        <div class="station-list">
+          <h4>開放兩鐵車站（官方清單；仍須搭指定班次）</h4>
+          <p><b>北部</b>　基隆、三坑、八堵、七堵、五堵、汐止、南港、松山、萬華、板橋、樹林、鶯歌、桃園、中壢、埔心、楊梅、富岡、北湖、湖口、新豐、竹北、新竹、三姓橋、香山、福隆、貢寮、雙溪、猴硐、瑞芳、四腳亭。</p>
+          <p><b>中部</b>　竹南、後龍、白沙屯、通霄、苑裡、日南、大甲、清水、沙鹿、龍井、大肚、追分、豐富、苗栗、銅鑼、三義、后里、豐原、栗林、潭子、頭家厝、松竹、太原、精武、臺中、五權、大慶、新烏日、成功、彰化、花壇、員林、社頭、田中、二水。</p>
+          <p><b>南部</b>　林內、斗六、斗南、大林、民雄、嘉義、新營、隆田、善化、南科、新市、永康、臺南、保安、中洲、大湖、路竹、岡山、橋頭、楠梓、新左營、左營、內惟、美術館、三塊厝、高雄、民族、科工館、正義、鳳山、九曲堂、屏東、西勢、竹田、潮州、南州、林邊、佳冬、枋寮、加祿。</p>
+          <p><b>東部</b>　大武、瀧溪、金崙、太麻里、知本、康樂、臺東、鹿野、瑞源、關山、池上、富里、東竹、東里、玉里、瑞穗、富源、光復、萬榮、鳳林、南平、林榮新光、壽豐、志學、吉安、花蓮、新城、崇德、和平、南澳、東澳、蘇澳、蘇澳新、冬山、羅東、宜蘭、礁溪、頭城。</p>
+          <p class="station-warning">注意：臺北站不在目前官方開放兩鐵車站清單內。清單代表車站可辦理，不代表所有停靠列車都可整車上車；仍應查「兩鐵列車時刻／車次」及剩餘額度。</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="route-explorer" id="routes">
+      <div class="section-heading">
+        <div><span class="kicker">互動路線庫</span><h2>今天想往哪裡騎？</h2></div>
+        <p id="resultCount">共 26 條路線</p>
+      </div>
+
+      <div class="filter-panel" aria-label="路線篩選器">
+        <div class="filter-group wide">
+          <label for="searchInput">搜尋路線、景點或美食</label>
+          <div class="search-wrap"><span>⌕</span><input id="searchInput" type="search" placeholder="例如：日月潭、海線、米苔目"></div>
+        </div>
+        <div class="filter-group">
+          <label for="regionFilter">地區</label>
+          <select id="regionFilter"><option value="all">全台灣</option><option value="北部">北部</option><option value="中部">中部</option><option value="南部">南部</option><option value="東部">東部</option></select>
+        </div>
+        <div class="filter-group">
+          <label for="distanceFilter">距離</label>
+          <select id="distanceFilter"><option value="all">全部距離</option><option value="short">40 km 以下</option><option value="medium">41–55 km</option><option value="long">56–70 km</option></select>
+        </div>
+        <div class="filter-group">
+          <label for="typeFilter">路線類型</label>
+          <select id="typeFilter"><option value="all">全部類型</option><option value="自行車道">自行車道優先</option><option value="海岸">海岸風景</option><option value="田園">田園聚落</option><option value="山景">山景爬升</option><option value="城市">城市慢遊</option></select>
+        </div>
+        <button id="resetFilters" class="reset">清除</button>
+      </div>
+
+      <div class="explorer-grid">
+        <div class="route-list" id="routeList" aria-live="polite"></div>
+        <div class="map-shell">
+          <div id="map" role="application" aria-label="台灣單車路線互動地圖"></div>
+          <div class="map-legend"><span><i class="dot start"></i>起點</span><span><i class="dot poi"></i>補給／景點</span><span><i class="line"></i>規劃軌跡</span></div>
+          <button class="map-reset" id="mapReset">顯示全台</button>
+        </div>
+      </div>
+      <p class="map-note">地圖線為依道路與自行車道節點繪製的行前規劃軌跡，並非即時導航。下載 GPX 後，仍請依現場標誌、施工與天候調整；禁止行駛路段請下車牽行或改道。</p>
+    </section>
+
+    <section class="checklist" id="checklist">
+      <div class="section-heading light">
+        <div><span class="kicker">兩人雙電池設定</span><h2>出發前 5 分鐘檢查</h2></div>
+        <p>點一下即可勾選，記錄只留在這台裝置。</p>
+      </div>
+      <div class="check-grid" id="checkGrid">
+        <label><input type="checkbox" data-check="battery"><span>4 顆電池全滿，端子防短路</span></label>
+        <label><input type="checkbox" data-check="bags"><span>兩只合規攜車袋與束帶</span></label>
+        <label><input type="checkbox" data-check="rail"><span>兩人兩車班次／額度已確認</span></label>
+        <label><input type="checkbox" data-check="tools"><span>內胎、補胎、打氣筒與基本工具</span></label>
+        <label><input type="checkbox" data-check="weather"><span>降雨、風向、體感溫度已確認</span></label>
+        <label><input type="checkbox" data-check="offline"><span>GPX 與離線地圖已存入手機</span></label>
+      </div>
+      <div class="battery-tip"><b>換電建議</b><span>平路約騎至 35–45 km 或首顆剩 25–30% 時換電；爬坡、逆風與高輔助模式請提早。兩車電耗不同時，不要共用同一個里程門檻。</span></div>
+    </section>
+  </main>
+
+  <footer><span>騎電台灣 · 私人旅程規劃</span><span>路況與班次會變動，出發前請再次查證。</span></footer>
+
+  <dialog id="routeDialog">
+    <button class="dialog-close" aria-label="關閉">×</button>
+    <div id="dialogContent"></div>
+  </dialog>
+
+  <noscript>此互動地圖需要啟用 JavaScript。</noscript>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
