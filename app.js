@@ -147,6 +147,7 @@
     </div><div class="dialog-body">
       <div class="route-strip"><span>🚉 ${safeText(r.start)}</span><i></i><span>${safeText(r.end)} 🚉</span></div>
       <div class="source-row"><span class="source-badge ${r.personal ? "personal" : (/^官方/.test(r.source?.kind || "") ? "official" : "")}">${safeText(r.source?.kind || "本站規劃")}</span>${r.source?.url ? `<a class="source-link" href="${r.source.url}" target="_blank" rel="noopener">${safeText(r.source.label)} ↗</a>` : `<span class="source-link">${safeText(r.source?.label || "行前規劃")}</span>`}</div>
+      ${r.gpxStatus ? `<p class="gpx-status"><b>GPX 說明：</b>${safeText(r.gpxStatus)}${r.videoSource ? `　<a href="${r.videoSource}" target="_blank" rel="noopener">查看參考影片 ↗</a>` : ""}</p>` : ""}
       <div class="detail-grid">
         <div class="detail-block"><h4>台鐵銜接方式</h4><p>${safeText(r.train)}</p></div>
         <div class="detail-block"><h4>景點特色</h4>${detailList(r.highlights)}</div>
